@@ -1,0 +1,21 @@
+#include <stdio.h>
+
+int main() {
+    int n, f, i, j = 0, faults = 0;
+    printf("Pages: "); scanf("%d", &n);
+    int pages[n]; for (i = 0; i < n; i++) scanf("%d", &pages[i]);
+    printf("Frames: "); scanf("%d", &f);
+    int frame[f]; for (i = 0; i < f; i++) frame[i] = -1;
+
+    for (i = 0; i < n; i++) {
+        int hit = 0;
+        for (int k = 0; k < f; k++)
+            if (frame[k] == pages[i]) hit = 1;
+        if (!hit) {
+            frame[j] = pages[i];
+            j = (j + 1) % f;
+            faults++;
+        }
+    }
+    printf("Page Faults = %d\n", faults);
+}
