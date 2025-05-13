@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main() {
+    int n, i, j, b[10], w=0, t=0, x;
+    float aw=0, at=0;
+    scanf("%d", &n);
+    for(i=0;i<n;i++) scanf("%d",&b[i]);
+    for(i=0;i<n-1;i++)
+        for(j=i+1;j<n;j++)
+            if(b[i]>b[j]) { x=b[i]; b[i]=b[j]; b[j]=x; }
+    for(i=0;i<n;i++) {
+        t = w + b[i];
+        printf("P%d %d %d %d\n", i+1, b[i], w, t);
+        aw += w; at += t;
+        w += b[i];
+    }
+    printf("Avg WT=%.2f Avg TAT=%.2f\n", aw/n, at/n);
+}
