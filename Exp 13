@@ -1,0 +1,31 @@
+#include <stdio.h>
+
+int main() {
+    int n, f, p[50], fr[10], t[10], i, j, k, c = 0, fault = 0, min, pos;
+    scanf("%d", &n);           // number of pages
+    for (i = 0; i < n; i++) scanf("%d", &p[i]); // page refs
+    scanf("%d", &f);           // number of frames
+    for (i = 0; i < f; i++) fr[i] = -1;
+
+    for (i = 0; i < n; i++) {
+        int hit = 0;
+        for (j = 0; j < f; j++)
+            if (fr[j] == p[i]) { t[j] = ++c; hit = 1; break; }
+
+        if (!hit) {
+            for (j = 0; j < f; j++)
+                if (fr[j] == -1) break;
+
+            if (j < f) fr[j] = p[i];
+            else {
+                min = t[0], pos = 0;
+                for (k = 1; k < f; k++)
+                    if (t[k] < min) min = t[k], pos = k;
+                fr[pos] = p[i]; j = pos;
+            }
+            t[j] = ++c; fault++;
+        }
+    }
+    printf("%d\n", fault);
+    return 0;
+}
