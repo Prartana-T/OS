@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int main() {
+    int n, i, j, bt[10], pr[10], wt=0, tat=0, p[10], t;
+    float awt=0, atat=0;
+
+    scanf("%d", &n);
+    for(i=0;i<n;i++){ scanf("%d%d", &bt[i], &pr[i]); p[i]=i+1; }
+
+    for(i=0;i<n-1;i++)
+        for(j=i+1;j<n;j++)
+            if(pr[j]<pr[i]){
+                t=pr[i]; pr[i]=pr[j]; pr[j]=t;
+                t=bt[i]; bt[i]=bt[j]; bt[j]=t;
+                t=p[i];  p[i]=p[j];  p[j]=t;
+            }
+
+    for(i=0;i<n;i++){
+        printf("P%d %d %d %d %d\n", p[i], bt[i], pr[i], wt, wt+bt[i]);
+        awt+=wt; tat=wt+bt[i]; atat+=tat; wt=tat;
+    }
+
+    printf("%.2f %.2f\n", awt/n, atat/n);
+    return 0;
+}
